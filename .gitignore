@@ -1,0 +1,18 @@
+# Virtual environment & Python cache
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Local SQLite databases & generated runtime storage
+*.db
+*.db-journal
+*.db-wal
+storage/
+
+# Environment secrets & OS files
+.env
+.DS_Store
+Thumbs.db
