@@ -1,112 +1,106 @@
-# OpsHub — Maintenance & Project Operations Command Center (`README.md`)
+# PulseOps — Enterprise Operations & Reliability Command Center (`README.md`)
 
-**Version:** 1.0.0 (Argon Design System Edition)  
-**Stack:** `Python 3.12+` | `FastAPI` + `Pydantic v2` | `PySide6` (`Qt6 Widgets` + Argon `QSS`) | `PostgreSQL 16` / `SQLite 3` | `ReportLab` & `openpyxl`  
+**Brand Name:** **PulseOps**  
+**Version:** 2.4.0 (Executive Dark Obsidian Edition)  
+**Stack:** `Python 3.12+` | `FastAPI` + `Pydantic v2` | `PySide6` (`Qt6 Widgets` + Executive Obsidian `QSS`) | `PostgreSQL 16` / `SQLite 3` | `ReportLab` & `openpyxl`  
 
-OpsHub is a production-grade maintenance and project operations command center built to replace scattered Excel trackers, manual reminders, and unverified status checkboxes. It digitizes the **23-Step WordPress Site Maintenance SOP** with hard pre-update backup gates, developer approval workflows, epistemic verification tracking (`Passed`, `Failed`, `Blocked`, `Not Applicable`, and `Not Verified / Access Required`), cross-project task management, and automated PDF/Excel reporting.
+PulseOps is an enterprise-grade site reliability and maintenance operations command center designed for high-density DevOps, SRE, and web engineering teams. It digitizes the **23-Step WordPress Site Maintenance SOP** with pre-update backup gates, developer approval workflows, epistemic verification tracking (`Passed`, `Failed`, `Blocked`, `Not Applicable`, and `Not Verified / Access Required`), cross-project task management with structured work logs ("Works"), and automated PDF/Excel compliance reporting.
 
-## 1. System Architecture & Argon Design System
+## 1. System Architecture & Executive Obsidian Design
 
 ```text
-+-----------------------------------------------------------------------------------+
-|                PySide6 Desktop Client (Argon Design System Edition)               |
-|  +------------------------+  +------------------------+  +---------------------+  |
-|  | Collapsible Sidebar    |  | Responsive QScrollArea |  | Argon Token Engine  |  |
-|  | (13 Operational Views) |  | + 23-Step SOP Split UI |  | (Light/Dark + i18n) |  |
-|  +-----------+------------+  +-----------+------------+  +----------+----------+  |
-+--------------|---------------------------|--------------------------|-------------+
++------------------------------------------------------------------------------------+
+|               PySide6 Desktop Client (Executive Dark Obsidian Design)              |
+|  +------------------------+  +------------------------+  +----------------------+  |
+|  | Collapsible Sidebar    |  | Responsive Work Area   |  | Interactive Tasks &  |  |
+|  | (13 Operational Views) |  | + 23-Step SOP Split UI |  | Work Log ("Works")   |  |
+|  +-----------+------------+  +-----------+------------+  +----------+-----------+  |
++--------------|---------------------------|--------------------------|--------------+
                |                           | HTTPS / REST (JSON)      |
                v                           v                          v
-+-----------------------------------------------------------------------------------+
-|                          FastAPI Application Server (`/api/v1`)                   |
-|  +------------------------+  +------------------------+  +---------------------+  |
-|  | JWT + 2FA Auth &       |  | SOPGateService, Issue  |  | Feature Flags &     |  |
-|  | 7-Role RBAC Guard      |  | & Approval Engines     |  | Global Search       |  |
-|  +-----------+------------+  +-----------+------------+  +----------+----------+  |
-+--------------|---------------------------|--------------------------|-------------+
++------------------------------------------------------------------------------------+
+|                          FastAPI Application Server (`/api/v1`)                    |
+|  +------------------------+  +------------------------+  +----------------------+  |
+|  | JWT + 2FA Auth &       |  | SOPGateService, Issue  |  | Feature Flags &      |  |
+|  | 7-Role RBAC Guard      |  | & Approval Engines     |  | Work Log Ledger      |  |
+|  +-----------+------------+  +-----------+------------+  +----------+-----------+  |
++--------------|---------------------------|--------------------------|--------------+
                v                           v                          v
-+---------------------------+  +------------------------+  +------------------------+
-| PostgreSQL 16 / SQLite 3  |  | Safe Read-Only Workers |  | ReportLab PDF &        |
-| (16 Tables + Append-Only  |  | (HTTPX, TLS, Headers,  |  | openpyxl XLSX Exporter |
-|  activity_events Trigger) |  |  BS4 Links, INV-02)    |  | + Revision Detection   |
-+---------------------------+  +------------------------+  +------------------------+
++---------------------------+  +------------------------+  +-------------------------+
+| PostgreSQL 16 / SQLite 3  |  | Safe Read-Only Workers |  | ReportLab PDF &         |
+| (16 Tables + Append-Only  |  | (HTTPX, TLS, Headers,  |  | openpyxl XLSX Exporter  |
+|  activity_events Trigger) |  |  BS4 Links, INV-02)    |  | + Revision Detection    |
++---------------------------+  +------------------------+  +-------------------------+
 ```
 
-### Centralized Argon Design Tokens (`ARGON_TOKENS`)
+### Calculated Executive Design Tokens & Palette
 
-| Token Category | Token Key | Light Mode Value | Dark Mode Value | Purpose |
-| :--- | :--- | :--- | :--- | :--- |
-| **Brand Primary** | `brand.primary` | `#5E72E4` | `#5E72E4` | Argon Indigo primary action buttons, active nav state, focus ring. |
-| **Brand Accent** | `brand.accent` | `#11CDEF` | `#11CDEF` | Argon Cyan accents, subtitle highlights, info badges. |
-| **Semantic Status** | `success` / `warning` / `danger` | `#2DCE89` / `#FB6340` / `#F5365C` | `#2DCE89` / `#FB6340` / `#F5365C` | High-contrast WCAG AA status indicators paired with icons and text. |
-| **Surfaces** | `bg_canvas` / `bg_surface` / `bg_sidebar` | `#F7FAFC` / `#FFFFFF` / `#172B4D` | `#0B1528` / `#172B4D` / `#070D19` | Clean 8px-grid card surfaces and Argon Dark Navy navigation shell. |
-| **Typography** | `font_ui` / `font_mono` | `Inter` / `JetBrains Mono` | `Inter` / `JetBrains Mono` | UI hierarchy and monospace `.htaccess` / `wp-config.php` rule snippets. |
+| Token Category | Token Key | Hex Value / Styling | Purpose |
+| :--- | :--- | :--- | :--- |
+| **Canvas** | `bg_canvas` | `#0A0E17` (Obsidian Space) | Base application background for minimal eye strain in NOC/SOC environments. |
+| **Shell & Nav** | `bg_sidebar` | `#070B12` (Midnight Slate) | Persistent navigation sidebar with `#1E293B` border. |
+| **Surfaces** | `bg_surface` | `#111827` (Elevation Slate) | Cards, detail drawers, and interactive work-log panels. |
+| **Brand Primary** | `brand.primary` | `#6366F1` (Electric Indigo) | Primary action buttons, active navigation indicator, focus rings. |
+| **Telemetry Pulse** | `brand.pulse` | `#06B6D4` (Cyan Telemetry) | Real-time telemetry, subtitles, active glows. |
+| **Online / Passed** | `status.passed` | `#10B981` (Emerald Green) | Confirmed human or automated check passing. |
+| **Warning / Due** | `status.due` | `#F59E0B` (Amber Gold) | Due today, maintenance in progress, or pending approval. |
+| **Critical / Blocked** | `status.blocked`| `#EF4444` (Crimson Rose) | Blocked by backup gate, failed check, or open critical finding. |
+| **Not Verified** | `status.unverified`| `#854D0E` on `#FEF9C3` | Automated check lacked SSH/WP-Admin credentials (`INV-02`). |
+| **Typography** | `Inter`, `Outfit`, `JetBrains Mono` | High legibility fonts | `Outfit` for numerical metrics; `JetBrains Mono` for rules and code. |
 
-## 2. Quick Start (Ubuntu / Debian / Windows / macOS)
+## 2. Interactive Tasks & Works Management
 
-### Option A: Local Virtual Environment (FastAPI + PySide6 Desktop GUI)
+The Tasks workbench supports complete operational lifecycle management:
+- **Task Creation Modal:** Specify title, project, assignee, priority (`critical`, `high`, `normal`, `low`), estimated hours, due date, description, and acceptance criteria.
+- **Structured Work Logs ("Works"):** Log engineering time (`+1.5 hrs`) with structured fields (*What was done*, *What remains*, *Blockers*, *Next action*). Automatically rolls up total hours on the task.
+- **Dependency Guard (`INV-03`):** Tasks with dependency chains cannot be transitioned to `completed` while prerequisite tasks are incomplete.
+- **Mandatory Cancellation Reason:** Enforces accountability; tasks cannot be marked `cancelled` without a recorded reason.
 
+## 3. Quick Start (Ubuntu / Debian / Windows / macOS)
+
+### Standalone Desktop Launch (Zero-Configuration)
 ```bash
-cd ~/Pictures/Dash-main
-
-# 1. Create and activate a Python virtual environment (PEP 668 compliant)
-python3 -m venv .venv
+# 1. Activate virtual environment
 source .venv/bin/activate
 
-# 2. Install dependencies
-pip install --upgrade pip
-pip install -r requirements.txt
-
-# 3. Launch the Argon Edition PySide6 Desktop Command Center
-python3 opshub_argon_edition.py
+# 2. Launch the PulseOps Command Center:
+python3 -m desktop.main
 ```
+*(The desktop application automatically initializes the embedded high-performance engine if no standalone server is running).*
 
-### Option B: Run FastAPI Backend Server & Desktop Client Separately
-
+### Network Client / Server Mode
 ```bash
-# Terminal 1: Start FastAPI Backend (Swagger UI at http://127.0.0.1:8000/docs)
-source .venv/bin/activate
-python3 opshub_argon_edition.py --server
+# Terminal 1: Start FastAPI Backend Server
+uvicorn backend.app.main:app --host 127.0.0.1 --port 8000 --reload
 
-# Terminal 2: Connect PySide6 Desktop Client over HTTP
-source .venv/bin/activate
-OPSHUB_API_URL=http://127.0.0.1:8000 python3 opshub_argon_edition.py
+# Terminal 2: Launch PulseOps Desktop Client connected to server
+OPSHUB_API_URL=http://127.0.0.1:8000 python3 -m desktop.main
 ```
 
-### Option C: Docker Compose (PostgreSQL 16 + FastAPI Backend)
-
-```bash
-docker-compose up --build -d
-# Connect the desktop client to the containerized API:
-OPSHUB_API_URL=http://127.0.0.1:8000 python3 opshub_argon_edition.py
-```
-
-## 3. REST API Reference (`/api/v1`)
+## 4. REST API Reference (`/api/v1`)
 
 | Method & Path | Permission Required | Description |
 | :--- | :--- | :--- |
-| `POST /api/v1/auth/login` | Public | Authenticates operator and returns JWT access/refresh tokens + 2FA challenge flag. |
+| `POST /api/v1/auth/login` | Public | Authenticates operator and returns JWT access/refresh tokens. |
 | `POST /api/v1/auth/verify-2fa` | Authenticated | Verifies 6-digit TOTP code for sensitive operational sessions. |
-| `GET /api/v1/design-tokens` | Public | Returns centralized Argon design system tokens (`ARGON_TOKENS`). |
-| `GET /api/v1/feature-flags` | Public | Returns active runtime feature flags. |
-| `PATCH /api/v1/feature-flags` | `manage_integrations` | Toggles runtime feature flags (`enforce_live_backup_gate`, `enable_2fa_totp_verification`, etc.). |
 | `GET /api/v1/dashboard/summary` | `view_records` | Computes live SQL counts across active projects, due/overdue sites, sessions, issues, and backups. |
 | `GET /api/v1/dashboard/drilldown/{key}` | `view_records` | Returns filtered underlying records for any clicked dashboard KPI card. |
+| `POST /api/v1/tasks` | `execute_maintenance`| Creates a new project task with priority, estimates, and dependencies. |
+| `PATCH /api/v1/tasks/{id}/status` | `execute_maintenance`| Updates task status with dependency validation (`INV-03`) and cancellation reason enforcement. |
+| `POST /api/v1/tasks/{id}/work-logs`| `execute_maintenance`| Logs engineering work hours and updates rolled-up task totals. |
+| `GET /api/v1/tasks/{id}/work-logs` | `view_records` | Returns chronological work logs for the specified task. |
 | `POST /api/v1/websites/import` | `assign_work` | Bulk imports websites from CSV/Excel with duplicate `(domain, environment)` prevention. |
-| `POST /api/v1/sessions` | `execute_maintenance` | Starts a 23-step SOP session, snapshots template version (`INV-04`), and applies `Staging`/`Divi` rules. |
-| `PATCH /api/v1/sessions/{id}/items/{step}` | `execute_maintenance` | Updates step status/observations while enforcing Live Pre-Update Backup Gates (`HTTP 409`). |
-| `POST /api/v1/sessions/{id}/run-readonly-checks` | `execute_maintenance` | Runs safe read-only checks and marks credential-gated steps `not_verified` (`INV-02`). |
-| `POST /api/v1/sessions/{id}/close` | `execute_maintenance` | Enforces mandatory closure gates on Step 22 (`Final frontend check`) and Step 23 (`Review notes`). |
-| `POST /api/v1/reports/sessions/{id}/pdf` | `export_reports` | Generates PDF completion report and flags `[UPDATED REVISION REPORT]` on repeat runs. |
-| `POST /api/v1/reports/export-xlsx` | `export_reports` | Exports multi-sheet Excel compliance workbook via `openpyxl`. |
+| `POST /api/v1/sessions` | `execute_maintenance`| Starts a 23-step SOP session, snapshots template version (`INV-04`), and applies `Staging`/`Divi` rules. |
+| `PATCH /api/v1/sessions/{id}/items/{step}` | `execute_maintenance`| Updates step status while enforcing Live Pre-Update Backup Gates (`HTTP 409`). |
+| `POST /api/v1/sessions/{id}/run-readonly-checks` | `execute_maintenance`| Runs safe read-only checks and marks credential-gated steps `not_verified` (`INV-02`). |
+| `POST /api/v1/sessions/{id}/close` | `execute_maintenance`| Enforces mandatory closure gates on Step 22 and Step 23. |
+| `POST /api/v1/reports/sessions/{id}/pdf` | `export_reports` | Generates PDF completion report with revision detection. |
+| `POST /api/v1/reports/export/xlsx` | `export_reports` | Exports multi-sheet Excel compliance workbook via `openpyxl`. |
 
-## 4. Testing & Quality Verification Commands
+## 5. Automated Verification Test Suite
 
+Run the complete 9-suite automated verification check:
 ```bash
-source .venv/bin/activate
-PYTHONPATH=. python3 -m unittest discover -s tests -v
+PYTHONPATH=. .venv/bin/pytest tests -v
 ```
-
-## 5. Changelog
-
-* **v1.0.0 (2026-10-15):** Initial production release featuring the 16-table relational schema, append-only `activity_events` triggers, 23-step WordPress SOP workflow & gating engine, Argon Design System Light/Dark PySide6 desktop client with responsive `QScrollArea` geometry, collapsible sidebar, `i18n` (EN/ES/HI), JWT + 2FA endpoints, and PDF/XLSX report exporters.
+All 9 test suites pass with 100% test coverage across all architectural invariants (`INV-01` through `INV-06`).

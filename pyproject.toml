@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "opshub"
+version = "1.0.0"
+description = "OpsHub — Maintenance & Project Operations Command Center"
+readme = "readme.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.110.0",
+    "pydantic>=2.6.0",
+    "uvicorn[standard]>=0.29.0",
+    "httpx>=0.27.0",
+    "beautifulsoup4>=4.12.0",
+    "openpyxl>=3.1.2",
+    "reportlab>=4.1.0",
+    "PySide6>=6.7.0",
+    "pyqtgraph>=0.13.7",
+    "keyring>=25.0.0",
+    "APScheduler>=3.10.4",
+    "pytest>=8.0.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::starlette.testclient.StarletteDeprecationWarning",
+]
